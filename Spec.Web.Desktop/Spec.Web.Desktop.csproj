@@ -104,6 +104,10 @@
     <Folder Include="Steps\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Nunit.TestExtenstion\Nunit.TestExtenstion.csproj">
+      <Project>{962f713a-2c51-47a0-86c6-8979ceaedbcb}</Project>
+      <Name>Nunit.TestExtenstion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Spec.Web.Bindings\Spec.Web.Bindings.csproj">
       <Project>{586bfea9-1895-4acc-bbb2-287551df84a9}</Project>
       <Name>Spec.Web.Bindings</Name>
