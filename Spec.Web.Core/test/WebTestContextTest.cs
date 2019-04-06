@@ -12,12 +12,6 @@ namespace Spec.Web.Core.test
     [TestFixture(Category = "UnitTest")]
     class WebTestContextTest
     {
-        private TimeoutConfig timeoutConfig = new TimeoutConfig
-        {
-            NewCommandTimeout = 90001,
-            ImplicitWait = 90002,
-            PageLoad = 90003
-        };
         private LocalDriverConfig driverConfig;
         private Mock<DriverFactory> mockDriverFactory;
         private ICapabilities receivedCapabilities;
@@ -46,10 +40,12 @@ namespace Spec.Web.Core.test
                 PlatformVersion = "8",
                 BrowserName = MobileBrowserType.Chrome,
                 DeviceName = "device name",
-                ServerUrl = serverUrl
+                ServerUrl = serverUrl,
+                NewCommandTimeout = 90001,
+                ImplicitWait = 90002,
+                PageLoad = 90003
             };
             var testSettings = new TestSettingsConfig();
-            testSettings.Timeout = timeoutConfig;
             testSettings.LocalDriver = driverConfig;
 
             var webTestContext = new WebTestContext(mockDriverFactory.Object, testSettings);
@@ -71,10 +67,12 @@ namespace Spec.Web.Core.test
                 PlatformVersion = "10.1",
                 BrowserName = MobileBrowserType.Safari,
                 DeviceName = "device name",
-                ServerUrl = serverUrl
+                ServerUrl = serverUrl,
+                NewCommandTimeout = 90001,
+                ImplicitWait = 90002,
+                PageLoad = 90003
             };
             var testSettings = new TestSettingsConfig();
-            testSettings.Timeout = timeoutConfig;
             testSettings.LocalDriver = driverConfig;
 
             var webTestContext = new WebTestContext(mockDriverFactory.Object, testSettings);
@@ -93,10 +91,12 @@ namespace Spec.Web.Core.test
             driverConfig = new LocalDriverConfig
             {
                 PlatformName = "",
-                ServerUrl = serverUrl
+                ServerUrl = serverUrl,
+                NewCommandTimeout = 90001,
+                ImplicitWait = 90002,
+                PageLoad = 90003
             };
             var testSettings = new TestSettingsConfig();
-            testSettings.Timeout = timeoutConfig;
             testSettings.LocalDriver = driverConfig;
 
             var webTestContext = new WebTestContext(mockDriverFactory.Object, testSettings);

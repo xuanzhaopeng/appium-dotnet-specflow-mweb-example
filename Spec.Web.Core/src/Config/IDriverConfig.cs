@@ -7,8 +7,14 @@ namespace Spec.Web.Core.Config
     {
         Uri GetServerUri();
 
-        DriverOptions GetDriverOptions(double newCommandTimeout);
+        DriverOptions GetDriverOptions();
 
-        DriverOptions GetDriverOptions(String platformName, String platformVersion, String deviceName, String browserName, double newCommandTimeout);
+        DriverOptions GetDriverOptions(String platformName, String platformVersion, String deviceName, String browserName);
+
+        Double GetNewCommandTimeout();
+
+        Double GetImplicitWait();
+
+        Double GetPageLoadTimeout();
     }
 }

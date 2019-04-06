@@ -17,12 +17,5 @@ namespace Spec.Web.Core.Config
             get { return (SauceLabsDriverConfig)this["SauceLabsDriver"]; }
             set { this["SauceLabsDriver"] = value; }
         }
-
-        [ConfigurationProperty("Timeout")]
-        public TimeoutConfig Timeout
-        {
-            get { return (TimeoutConfig)this["Timeout"]; }
-            set { this["Timeout"] = value; }
-        }
     }
 }

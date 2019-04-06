@@ -12,12 +12,6 @@ namespace Spec.Web.Core.test.integration
         private WebTestContext webTestContext;
         private LocalDriverConfig driverConfig;
         private readonly string serverUrl = "http://localhost:4723/wd/hub";
-        private TimeoutConfig timeoutConfig = new TimeoutConfig
-        {
-            NewCommandTimeout = 90001,
-            ImplicitWait = 90002,
-            PageLoad = 90003
-        };
 
 
         [Test(Description = "start local android driver")]
@@ -28,10 +22,12 @@ namespace Spec.Web.Core.test.integration
                 PlatformName = MobilePlatform.Android,
                 BrowserName = MobileBrowserType.Chrome,
                 DeviceName = "Android Emulator",
-                ServerUrl = serverUrl
+                ServerUrl = serverUrl,
+                NewCommandTimeout = 90001,
+                ImplicitWait = 90002,
+                PageLoad = 90003
             };
             var testSettings = new TestSettingsConfig();
-            testSettings.Timeout = timeoutConfig;
             testSettings.LocalDriver = driverConfig;
 
             webTestContext = new WebTestContext(new DriverFactory(), testSettings);

@@ -32,10 +32,10 @@ namespace Spec.Web.Core
             logger.Info("============== Initializing Test context ==============");
             this.ProviderType = GetProviderType();
             this.TestSettings = testSettings;
-            var driverConfig = GetDriverConfig();
+            this.driverConfig = GetDriverConfig();
 
             this.serverUri = driverConfig.GetServerUri();
-            this.driverOptions = driverConfig.GetDriverOptions(TestSettings.Timeout.NewCommandTimeout);
+            this.driverOptions = driverConfig.GetDriverOptions();
             this.driverFactory = driverFactory;
             this.pageCollector = new PageCollector();
             logger.Info("- Driver Config: \n{0}", driverConfig.ToString());
@@ -49,15 +49,15 @@ namespace Spec.Web.Core
             this._driver = this.driverFactory.Create(
                 this.serverUri,
                 this.driverOptions,
-                TimeSpan.FromMilliseconds(this.TestSettings.Timeout.NewCommandTimeout),
+                TimeSpan.FromMilliseconds(this.driverConfig.GetNewCommandTimeout()),
                 (IWebDriver driver) =>
                 {
-                    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(this.TestSettings.Timeout.ImplicitWait);
-                    driver.Manage().Timeouts().PageLoad = TimeSpan.FromMilliseconds(this.TestSettings.Timeout.PageLoad);
+                    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(this.driverConfig.GetImplicitWait());
+                    driver.Manage().Timeouts().PageLoad = TimeSpan.FromMilliseconds(this.driverConfig.GetPageLoadTimeout());
 
                     logger.Info("Driver Timeout config:");
-                    logger.Info("- Driver implicit wait: {0} milleseconds", this.TestSettings.Timeout.ImplicitWait);
-                    logger.Info("- Driver page load wait: {0} milleseconds", this.TestSettings.Timeout.PageLoad);
+                    logger.Info("- Driver implicit wait: {0} milleseconds", this.driverConfig.GetImplicitWait());
+                    logger.Info("- Driver page load wait: {0} milleseconds", this.driverConfig.GetPageLoadTimeout());
                     logger.Info("============== Initialized Driver Complete ==============\n");
                 });
         }
@@ -116,6 +116,7 @@ namespace Spec.Web.Core
         private readonly Uri serverUri;
         private readonly DriverFactory driverFactory;
         private readonly PageCollector pageCollector;
+        private readonly IDriverConfig driverConfig;
         #endregion
     }
 }

@@ -91,7 +91,6 @@
     <Compile Include="src\Config\LocalDriverConfig.cs" />
     <Compile Include="src\Config\SauceLabsDriverConfig.cs" />
     <Compile Include="src\Config\TestSettingsConfig.cs" />
-    <Compile Include="src\Config\TimeoutConfig.cs" />
     <Compile Include="src\DriverFactory.cs" />
     <Compile Include="src\Enum\ProviderType.cs" />
     <Compile Include="src\Env.cs" />

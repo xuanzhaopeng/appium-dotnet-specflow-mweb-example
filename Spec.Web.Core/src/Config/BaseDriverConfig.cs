@@ -46,12 +46,33 @@ namespace Spec.Web.Core.Config
             set { this["ServerUrl"] = value; }
         }
 
-        public virtual DriverOptions GetDriverOptions(double newCommandTimeout)
+        [ConfigurationProperty("NewCommandTimeout", IsRequired = false, DefaultValue = (double)60000)]
+        public double NewCommandTimeout
         {
-            return GetDriverOptions(null, null, null, null, newCommandTimeout);
+            get { return (Double)this["NewCommandTimeout"]; }
+            set { this["NewCommandTimeout"] = value; }
         }
 
-        public virtual DriverOptions GetDriverOptions(string platformName, string platformVersion, string deviceName, string browserName, double newCommandTimeout)
+        [ConfigurationProperty("ImplicitWait", IsRequired = false, DefaultValue = (double)60000)]
+        public double ImplicitWait
+        {
+            get { return (Double)this["ImplicitWait"]; }
+            set { this["ImplicitWait"] = value; }
+        }
+
+        [ConfigurationProperty("PageLoad", IsRequired = false, DefaultValue = (double)60000)]
+        public double PageLoad
+        {
+            get { return (Double)this["PageLoad"]; }
+            set { this["PageLoad"] = value; }
+        }
+
+        public virtual DriverOptions GetDriverOptions()
+        {
+            return GetDriverOptions(null, null, null, null);
+        }
+
+        public virtual DriverOptions GetDriverOptions(string platformName, string platformVersion, string deviceName, string browserName)
         {
             string _platformName = String.IsNullOrEmpty(platformName) ? PlatformName : platformName;
             string _platformVersion = String.IsNullOrEmpty(platformVersion) ? PlatformVersion : platformVersion;
@@ -67,11 +88,26 @@ namespace Spec.Web.Core.Config
                     driverOptions.AddAdditionalCapability(MobileCapabilityType.DeviceName, _deviceName);
                     driverOptions.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, _platformVersion);
                     driverOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, _platformName);
-                    driverOptions.AddAdditionalCapability(MobileCapabilityType.NewCommandTimeout, newCommandTimeout);
+                    driverOptions.AddAdditionalCapability(MobileCapabilityType.NewCommandTimeout, NewCommandTimeout);
                     return driverOptions;
                 default:
                     return new ChromeOptions();
             }
+        }
+
+        public double GetImplicitWait()
+        {
+            return ImplicitWait;
+        }
+
+        public double GetNewCommandTimeout()
+        {
+            return NewCommandTimeout;
+        }
+
+        public double GetPageLoadTimeout()
+        {
+            return PageLoad;
         }
 
         public Uri GetServerUri()

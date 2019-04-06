@@ -35,14 +35,14 @@ namespace Spec.Web.Core.Config
             set { this["AppiumVersion"] = value; }
         }
 
-        public override DriverOptions GetDriverOptions(double newCommandTimeout)
+        public override DriverOptions GetDriverOptions()
         {
-            return GetDriverOptions(null, null, null, null, newCommandTimeout);
+            return GetDriverOptions(null, null, null, null);
         }
 
-        public override DriverOptions GetDriverOptions(string platformName, string platformVersion, string deviceName, string browserName, double newCommandTimeout)
+        public override DriverOptions GetDriverOptions(string platformName, string platformVersion, string deviceName, string browserName)
         {
-            var driverOptions = base.GetDriverOptions(platformName, platformVersion, deviceName, browserName, newCommandTimeout);
+            var driverOptions = base.GetDriverOptions(platformName, platformVersion, deviceName, browserName);
             var apiKey = String.IsNullOrEmpty(Environment.GetEnvironmentVariable(Env.SauceLabsAPIKey)) ? ApiKey : Environment.GetEnvironmentVariable(Env.SauceLabsAPIKey);
 
             switch (driverOptions.ToCapabilities().GetCapability(MobileCapabilityType.PlatformName))
