@@ -39,8 +39,8 @@ namespace Spec.Web.Core
             this.DriverOptions = CreateDriverOptions(driverConfig);
             this.DriverFactory = driverFactory;
             this.PageCollector = new PageCollector();
-            logger.Debug("============== Initialize Test context ==============");
-            logger.Debug("- Driver Config: \n{0}", driverConfig.ToString());
+            logger.Info("============== Initialize Test context ==============");
+            logger.Info("- Driver Config: \n{0}", driverConfig.ToString());
         }
 
         public void StartDriver()

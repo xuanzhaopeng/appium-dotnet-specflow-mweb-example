@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Spec.Web.Core.test
 {
-    [TestFixture]
+    [TestFixture(Category = "UnitTest")]
     class WebTestContextTest
     {
         private TimeoutConfig timeoutConfig = new TimeoutConfig

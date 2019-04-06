@@ -4,5 +4,7 @@ mono:
   - latest
 install:
   - nuget restore Spec.Web.sln
+  - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 script:
   - msbuild /p:Configuration=Release Spec.Web.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./Spec.Web.Core/bin/Release/Spec.Web.Core.dll /include:UnitTest

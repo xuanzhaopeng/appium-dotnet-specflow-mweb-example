@@ -19,7 +19,7 @@ namespace Spec.Web.Core.Config
             set { this["PlatformVersion"] = value; }
         }
 
-        [ConfigurationProperty("BrowserName", IsRequired = true )]
+        [ConfigurationProperty("BrowserName", IsRequired = true)]
         public string BrowserName
         {
             get { return (String)this["BrowserName"]; }
@@ -38,6 +38,18 @@ namespace Spec.Web.Core.Config
         {
             get { return (String)this["ServerUrl"]; }
             set { this["ServerUrl"] = value; }
+        }
+
+        public override string ToString()
+        {
+            string pattern = @"---------------------
+    PlatformName:    {0}
+    PlatformVersion: {1}
+    BrowserName:     {2}
+    DeviceName:      {3}
+    ServerUrl:       {4}
+---------------------";
+            return String.Format(pattern, this["PlatformName"], this["PlatformVersion"], this["BrowserName"], this["DeviceName"], this["ServerUrl"]);
         }
     }
 }
