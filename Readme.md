@@ -1,4 +1,4 @@
-# # Mobile web/Desktop Browser test starter
+# Mobile web/Desktop Browser test starter
 
 [![Build Status](https://travis-ci.org/xuanzhaopeng/appium-dotnet-specflow-mweb-example.svg?branch=master)](https://travis-ci.org/xuanzhaopeng/appium-dotnet-specflow-mweb-example)
 
