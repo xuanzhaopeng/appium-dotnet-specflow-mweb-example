@@ -1,6 +1,6 @@
 # # Mobile web/Desktop Browser test starter
 
->> The project is in C#.Net, with the help of Appium/Selenium(.net version), NUnit and Specflow.  
+> The project is in C#.Net, with the help of Appium/Selenium(.net version), NUnit and Specflow.  
 
 ### Configure driver and timeout
 ```xml
