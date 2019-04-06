@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Spec.Web.Android.Features
+namespace Spec.Web.Mobile.Features
 {
     using TechTalk.SpecFlow;
     
