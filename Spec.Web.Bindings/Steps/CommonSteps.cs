@@ -2,7 +2,7 @@
 using Spec.Web.Core.Specflow;
 using TechTalk.SpecFlow;
 
-namespace Spec.Web.Android.Steps
+namespace Spec.Web.Bindings.Steps
 {
     [Binding]
     public sealed class CommonSteps

@@ -1,8 +1,8 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
+using SeleniumExtras.PageObjects;
 using Spec.Web.Core.Pages;
 
-namespace Spec.Web.Android.Pages
+namespace Spec.Web.Bindings.Pages
 {
     public class GlobalIndexPage : BasePage
     {

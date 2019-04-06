@@ -91,6 +91,7 @@ namespace Spec.Web.Core.test
             driverConfig = new LocalDriverConfig
             {
                 PlatformName = "",
+                BrowserName = "Chrome",
                 ServerUrl = serverUrl,
                 NewCommandTimeout = 90001,
                 ImplicitWait = 90002,

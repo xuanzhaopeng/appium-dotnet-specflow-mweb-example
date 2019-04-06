@@ -17,5 +17,12 @@ namespace Spec.Web.Core.Config
             get { return (SauceLabsDriverConfig)this["SauceLabsDriver"]; }
             set { this["SauceLabsDriver"] = value; }
         }
+
+        [ConfigurationProperty("BrowserStackDriver")]
+        public BrowserStackDriverConfig BrowserStackDriver
+        {
+            get { return (BrowserStackDriverConfig)this["BrowserStackDriver"]; }
+            set { this["BrowserStackDriver"] = value; }
+        }
     }
 }

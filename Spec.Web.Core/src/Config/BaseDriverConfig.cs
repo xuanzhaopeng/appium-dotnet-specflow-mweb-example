@@ -4,6 +4,9 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Safari;
+using Spec.Web.Core.Exceptions;
 using System;
 using System.Configuration;
 
@@ -11,6 +14,20 @@ namespace Spec.Web.Core.Config
 {
     public abstract class BaseDriverConfig : ConfigurationElement, IDriverConfig
     {
+        [ConfigurationProperty("Platform", IsRequired = false, DefaultValue = "")]
+        public string Platform
+        {
+            get { return (String)this["Platform"]; }
+            set { this["Platform"] = value; }
+        }
+
+        [ConfigurationProperty("Version", IsRequired = false, DefaultValue = "")]
+        public string Version
+        {
+            get { return (String)this["Version"]; }
+            set { this["Version"] = value; }
+        }
+
         [ConfigurationProperty("PlatformName", IsRequired = false, DefaultValue = "")]
         public string PlatformName
         {
@@ -91,7 +108,17 @@ namespace Spec.Web.Core.Config
                     driverOptions.AddAdditionalCapability(MobileCapabilityType.NewCommandTimeout, NewCommandTimeout);
                     return driverOptions;
                 default:
-                    return new ChromeOptions();
+                    switch (_browserName)
+                    {
+                        case "Chrome":
+                            return new ChromeOptions();
+                        case "Firefox":
+                            return new FirefoxOptions();
+                        case "Safari":
+                            return new SafariOptions();
+                        default:
+                            throw new BrowserDoesNotSupportException("Only support Chrome, Firefox and Safari");
+                    }
             }
         }
 
@@ -126,5 +153,6 @@ namespace Spec.Web.Core.Config
 ---------------------";
             return String.Format(pattern, this["PlatformName"], this["PlatformVersion"], this["BrowserName"], this["DeviceName"], this["ServerUrl"]);
         }
+
     }
 }

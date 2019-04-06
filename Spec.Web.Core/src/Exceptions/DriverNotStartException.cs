@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Runtime.Serialization;
 
 namespace Spec.Web.Core.Exceptions
 {
@@ -13,9 +12,6 @@ namespace Spec.Web.Core.Exceptions
         {
         }
         public DriverNotStartException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-        protected DriverNotStartException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

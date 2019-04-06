@@ -103,7 +103,7 @@ namespace Spec.Web.Core
                 case ProviderType.SauceLabs:
                     return this.TestSettings.SauceLabsDriver;
                 case ProviderType.BrowserStack:
-                    throw new NotImplementedException();
+                    return this.TestSettings.BrowserStackDriver;
                 case ProviderType.Default:
                 default:
                     return this.TestSettings.LocalDriver;
