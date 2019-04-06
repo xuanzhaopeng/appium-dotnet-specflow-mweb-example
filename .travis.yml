@@ -1,0 +1,8 @@
+language: csharp
+solution: Spec.Web.sln
+mono:
+  - latest
+install:
+  - nuget restore Spec.Web.sln
+script:
+  - msbuild /p:Configuration=Release Spec.Web.sln
