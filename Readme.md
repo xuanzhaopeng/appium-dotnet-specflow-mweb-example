@@ -1,5 +1,7 @@
 # # Mobile web/Desktop Browser test starter
 
+[![Build Status](https://travis-ci.org/xuanzhaopeng/appium-dotnet-specflow-mweb-example.svg?branch=master)](https://travis-ci.org/xuanzhaopeng/appium-dotnet-specflow-mweb-example)
+
 > The project is in C#.Net, with the help of Appium/Selenium(.net version), NUnit and Specflow.  
 
 ### Configure driver and timeout
