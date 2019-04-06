@@ -85,12 +85,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Config\BaseDriverConfig.cs" />
     <Compile Include="src\Config\ConfigSectionTypes.cs" />
-    <Compile Include="src\Config\DriverConfig.cs" />
+    <Compile Include="src\Config\IDriverConfig.cs" />
+    <Compile Include="src\Config\LocalDriverConfig.cs" />
+    <Compile Include="src\Config\SauceLabsDriverConfig.cs" />
     <Compile Include="src\Config\TestSettingsConfig.cs" />
     <Compile Include="src\Config\TimeoutConfig.cs" />
     <Compile Include="src\DriverFactory.cs" />
+    <Compile Include="src\Enum\ProviderType.cs" />
+    <Compile Include="src\Env.cs" />
     <Compile Include="src\Exceptions\DriverNotStartException.cs" />
+    <Compile Include="src\Exceptions\IncorrectServerProviderTypeException.cs" />
     <Compile Include="src\Exceptions\InitialPageCollectorException.cs" />
     <Compile Include="src\PageCollector.cs" />
     <Compile Include="src\Pages\BasePage.cs" />

@@ -4,11 +4,18 @@ namespace Spec.Web.Core.Config
 {
     public class TestSettingsConfig : ConfigurationSection
     {
-        [ConfigurationProperty("Driver", IsRequired = true)]
-        public DriverConfig Driver
+        [ConfigurationProperty("LocalDriver")]
+        public LocalDriverConfig LocalDriver
         {
-            get { return (DriverConfig)this["Driver"]; }
-            set { this["Driver"] = value; }
+            get { return (LocalDriverConfig)this["LocalDriver"]; }
+            set { this["LocalDriver"] = value; }
+        }
+
+        [ConfigurationProperty("SauceLabsDriver")]
+        public SauceLabsDriverConfig SauceLabsDriver
+        {
+            get { return (SauceLabsDriverConfig)this["SauceLabsDriver"]; }
+            set { this["SauceLabsDriver"] = value; }
         }
 
         [ConfigurationProperty("Timeout")]

@@ -3,7 +3,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.Enums;
 using Spec.Web.Core.Config;
-using System;
 
 namespace Spec.Web.Core.test.integration
 {
@@ -11,7 +10,7 @@ namespace Spec.Web.Core.test.integration
     class WebTestContextIntegrationTest
     {
         private WebTestContext webTestContext;
-        private DriverConfig driverConfig;
+        private LocalDriverConfig driverConfig;
         private readonly string serverUrl = "http://localhost:4723/wd/hub";
         private TimeoutConfig timeoutConfig = new TimeoutConfig
         {
@@ -21,18 +20,21 @@ namespace Spec.Web.Core.test.integration
         };
 
 
-        [Test(Description = "start android driver")]
-        public void StartAndroidDriver()
+        [Test(Description = "start local android driver")]
+        public void StartLocalAndroidDriver()
         {
-            driverConfig = new DriverConfig
+            driverConfig = new LocalDriverConfig
             {
                 PlatformName = MobilePlatform.Android,
                 BrowserName = MobileBrowserType.Chrome,
                 DeviceName = "Android Emulator",
                 ServerUrl = serverUrl
             };
+            var testSettings = new TestSettingsConfig();
+            testSettings.Timeout = timeoutConfig;
+            testSettings.LocalDriver = driverConfig;
 
-            webTestContext = new WebTestContext(new DriverFactory(), driverConfig, timeoutConfig);
+            webTestContext = new WebTestContext(new DriverFactory(), testSettings);
             webTestContext.StartDriver();
             Assert.IsInstanceOf<AndroidDriver<IWebElement>>(webTestContext.Driver());
         }

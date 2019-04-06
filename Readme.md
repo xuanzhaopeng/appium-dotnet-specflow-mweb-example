@@ -12,9 +12,29 @@
     <Timeout NewCommandTimeout="90000" ImplicitWait="90000" PageLoad="90000"></Timeout>
   </TestSettings>
 ```
+### Run test
+* Run with SauceLabs Real Device (TestObject)
+```bash
+export SERVER_PROVIDER=SauceLabs
+export SAUCE_KEY=<Your Sauce API Key>
+
+nuget restore Spec.Web.sln
+nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
+msbuild /p:Configuration=Release Spec.Web.sln
+./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./Spec.Web.Mobile/bin/Release/Spec.Web.Mobile.dll
+```
+
+* Run with local Appium and Android
+```bash
+nuget restore Spec.Web.sln
+nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
+msbuild /p:Configuration=Release Spec.Web.sln
+./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./Spec.Web.Mobile/bin/Release/Spec.Web.Mobile.dll
+```
+
 ### Project structure
 * Spec.Web.Core: The core library that could be shared by all test assembly
-* Spec.Web.Android: The android mobile web test project, but I gonnna rename it to Spec.Web.Mobile as it could be shared between IOS and Android mweb test.
+* Spec.Web.Mobile: The mobile web test project for both Android and iOS.
 
 ### Copyright
 Please kindly notice this project is only could be used for LEARNING usage of Appium / Selenium / Specflow in C#.Net environment.

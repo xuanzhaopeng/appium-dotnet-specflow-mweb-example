@@ -5,6 +5,7 @@ using Moq;
 using OpenQA.Selenium;
 using System;
 using System.Threading.Tasks;
+using Spec.Web.Core.Enum;
 
 namespace Spec.Web.Core.test
 {
@@ -17,7 +18,7 @@ namespace Spec.Web.Core.test
             ImplicitWait = 90002,
             PageLoad = 90003
         };
-        private DriverConfig driverConfig;
+        private LocalDriverConfig driverConfig;
         private Mock<DriverFactory> mockDriverFactory;
         private ICapabilities receivedCapabilities;
         private readonly string serverUrl = "http://localhost:4723/wd/hub";
@@ -28,19 +29,18 @@ namespace Spec.Web.Core.test
             mockDriverFactory = new Mock<DriverFactory>();
             mockDriverFactory.Setup(IDriverFactory =>
             IDriverFactory.Create(
-                It.IsAny<String>(),
                 It.IsAny<Uri>(),
                 It.IsAny<DriverOptions>(),
                 It.IsAny<TimeSpan>(),
                 It.IsAny<Action<IWebDriver>>()))
-                .Callback((string platform, Uri serverUri, DriverOptions driverOptions, TimeSpan newCommandTimeout, Action<IWebDriver> callback) => receivedCapabilities = driverOptions.ToCapabilities())
+                .Callback((Uri serverUri, DriverOptions driverOptions, TimeSpan newCommandTimeout, Action<IWebDriver> callback) => receivedCapabilities = driverOptions.ToCapabilities())
                 .Returns(default(Task<IWebDriver>));
         }
 
-        [Test(Description = "create android driver")]
-        public void StartAndroidDriver()
+        [Test(Description = "create local android driver")]
+        public void CreateLocalAndroidDriver()
         {
-            driverConfig = new DriverConfig
+            driverConfig = new LocalDriverConfig
             {
                 PlatformName = MobilePlatform.Android,
                 PlatformVersion = "8",
@@ -48,20 +48,24 @@ namespace Spec.Web.Core.test
                 DeviceName = "device name",
                 ServerUrl = serverUrl
             };
+            var testSettings = new TestSettingsConfig();
+            testSettings.Timeout = timeoutConfig;
+            testSettings.LocalDriver = driverConfig;
 
-            var webTestContext = new WebTestContext(mockDriverFactory.Object, driverConfig, timeoutConfig);
+            var webTestContext = new WebTestContext(mockDriverFactory.Object, testSettings);
             webTestContext.StartDriver();
-            mockDriverFactory.Verify(IDriverFactory => IDriverFactory.Create(MobilePlatform.Android, It.IsAny<Uri>(), It.IsAny<DriverOptions>(), It.IsAny<TimeSpan>(), It.IsAny<Action<IWebDriver>>()), Times.Once);
+            mockDriverFactory.Verify(IDriverFactory => IDriverFactory.Create(It.IsAny<Uri>(), It.IsAny<DriverOptions>(), It.IsAny<TimeSpan>(), It.IsAny<Action<IWebDriver>>()), Times.Once);
             Assert.AreEqual(driverConfig.BrowserName, receivedCapabilities.GetCapability(MobileCapabilityType.BrowserName), "BrowserName is not equal");
             Assert.AreEqual(driverConfig.PlatformVersion, receivedCapabilities.GetCapability(MobileCapabilityType.PlatformVersion), "PlatformVersion is not equal");
-            Assert.AreEqual(driverConfig.PlatformVersion, receivedCapabilities.GetCapability(MobileCapabilityType.PlatformVersion), "PlatformVersion is not equal");
+            Assert.AreEqual(driverConfig.PlatformName, receivedCapabilities.GetCapability(MobileCapabilityType.PlatformName), "PlatformVersion is not equal");
             Assert.AreEqual(driverConfig.DeviceName, receivedCapabilities.GetCapability(MobileCapabilityType.DeviceName), "DeviceName is not equal");
+            Assert.AreEqual(ProviderType.Default, webTestContext.ProviderType);
         }
 
-        [Test(Description = "create iOS driver")]
-        public void StartIOSDriver()
+        [Test(Description = "create local iOS driver")]
+        public void CreateLocalIOSDriver()
         {
-            driverConfig = new DriverConfig
+            driverConfig = new LocalDriverConfig
             {
                 PlatformName = MobilePlatform.IOS,
                 PlatformVersion = "10.1",
@@ -69,28 +73,36 @@ namespace Spec.Web.Core.test
                 DeviceName = "device name",
                 ServerUrl = serverUrl
             };
+            var testSettings = new TestSettingsConfig();
+            testSettings.Timeout = timeoutConfig;
+            testSettings.LocalDriver = driverConfig;
 
-            var webTestContext = new WebTestContext(mockDriverFactory.Object, driverConfig, timeoutConfig);
+            var webTestContext = new WebTestContext(mockDriverFactory.Object, testSettings);
             webTestContext.StartDriver();
-            mockDriverFactory.Verify(IDriverFactory => IDriverFactory.Create(MobilePlatform.IOS, It.IsAny<Uri>(), It.IsAny<DriverOptions>(), It.IsAny<TimeSpan>(), It.IsAny<Action<IWebDriver>>()), Times.Once);
+            mockDriverFactory.Verify(IDriverFactory => IDriverFactory.Create(It.IsAny<Uri>(), It.IsAny<DriverOptions>(), It.IsAny<TimeSpan>(), It.IsAny<Action<IWebDriver>>()), Times.Once);
             Assert.AreEqual(driverConfig.BrowserName, receivedCapabilities.GetCapability(MobileCapabilityType.BrowserName), "BrowserName is not equal");
             Assert.AreEqual(driverConfig.PlatformVersion, receivedCapabilities.GetCapability(MobileCapabilityType.PlatformVersion), "PlatformVersion is not equal");
-            Assert.AreEqual(driverConfig.PlatformVersion, receivedCapabilities.GetCapability(MobileCapabilityType.PlatformVersion), "PlatformVersion is not equal");
+            Assert.AreEqual(driverConfig.PlatformName, receivedCapabilities.GetCapability(MobileCapabilityType.PlatformName), "PlatformVersion is not equal");
             Assert.AreEqual(driverConfig.DeviceName, receivedCapabilities.GetCapability(MobileCapabilityType.DeviceName), "DeviceName is not equal");
+            Assert.AreEqual(ProviderType.Default, webTestContext.ProviderType);
         }
 
-        [Test(Description = "create Remote web driver")]
-        public void StartRemoteWebDriver()
+        [Test(Description = "create local Remote web driver")]
+        public void CreateLocalRemoteWebDriver()
         {
-            driverConfig = new DriverConfig
+            driverConfig = new LocalDriverConfig
             {
                 PlatformName = "",
                 ServerUrl = serverUrl
             };
+            var testSettings = new TestSettingsConfig();
+            testSettings.Timeout = timeoutConfig;
+            testSettings.LocalDriver = driverConfig;
 
-            var webTestContext = new WebTestContext(mockDriverFactory.Object, driverConfig, timeoutConfig);
+            var webTestContext = new WebTestContext(mockDriverFactory.Object, testSettings);
             webTestContext.StartDriver();
-            mockDriverFactory.Verify(IDriverFactory => IDriverFactory.Create("", It.IsAny<Uri>(), It.IsAny<DriverOptions>(), It.IsAny<TimeSpan>(), It.IsAny<Action<IWebDriver>>()), Times.Once);
+            mockDriverFactory.Verify(IDriverFactory => IDriverFactory.Create(It.IsAny<Uri>(), It.IsAny<DriverOptions>(), It.IsAny<TimeSpan>(), It.IsAny<Action<IWebDriver>>()), Times.Once);
+            Assert.AreEqual(ProviderType.Default, webTestContext.ProviderType);
         }
     }
 }

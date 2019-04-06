@@ -4,6 +4,8 @@ using Spec.Web.Core.Config;
 using Spec.Web.Core.Specflow;
 using System.Configuration;
 using NLog;
+using System;
+using Spec.Web.Core.Enum;
 
 namespace Spec.Web.Android.Hooks
 {
@@ -11,23 +13,20 @@ namespace Spec.Web.Android.Hooks
     public sealed class GlobalHook
     {
         private static DriverFactory driverFactory;
-        private static DriverConfig driverConfig;
-        private static TimeoutConfig timeoutConfig;
+        private static TestSettingsConfig testSettings;
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
             driverFactory = new DriverFactory();
-            TestSettingsConfig testSettings = ConfigurationManager.GetSection("TestSettings") as TestSettingsConfig;
-            driverConfig = testSettings.Driver;
-            timeoutConfig = testSettings.Timeout;
+            testSettings = ConfigurationManager.GetSection(ConfigSectionTypes.TestingSettings) as TestSettingsConfig;
         }
 
         [BeforeScenario]
         public void BeforeScenario()
         {
-            WebTestContext webTestContext = new WebTestContext(driverFactory, driverConfig, timeoutConfig);
+            WebTestContext webTestContext = new WebTestContext(driverFactory, testSettings);
             webTestContext.StartDriver();
             ScenarioContext.Current.Add(ScenarioContextTypes.Driver, webTestContext);
         }
