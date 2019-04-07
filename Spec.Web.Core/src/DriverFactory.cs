@@ -15,7 +15,6 @@ namespace Spec.Web.Core
 
         public virtual Task<IWebDriver> Create(Uri serverUri, DriverOptions driverOptions, TimeSpan newCommandTimeout, Action<IWebDriver> callback)
         {
-            Console.Out.WriteLine(driverOptions.ToString());
             switch (driverOptions.ToCapabilities().GetCapability(MobileCapabilityType.PlatformName))
             {
                 case MobilePlatform.Android:

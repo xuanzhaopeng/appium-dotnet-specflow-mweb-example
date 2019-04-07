@@ -38,14 +38,14 @@ namespace Spec.Web.Core
             this.driverOptions = driverConfig.GetDriverOptions();
             this.driverFactory = driverFactory;
             this.pageCollector = new PageCollector();
-            logger.Info("- Driver Config: \n{0}", driverConfig.ToString());
+            logger.Info("- Driver Config: {0}", driverConfig.ToString());
             logger.Info("============== Initialized Test context complete ==============\n");
         }
 
         public void StartDriver()
         {
             logger.Info("============== Initializing Driver context ==============");
-            logger.Info("- Capabilities: \n{0}", this.driverOptions.ToCapabilities().ToString());
+            logger.Info("- Capabilities: {0}", this.driverOptions.ToCapabilities().ToString());
             this._driver = this.driverFactory.Create(
                 this.serverUri,
                 this.driverOptions,

@@ -98,6 +98,7 @@
     <Compile Include="src\Exceptions\BrowserDoesNotSupportException.cs" />
     <Compile Include="src\Exceptions\DriverNotStartException.cs" />
     <Compile Include="src\Exceptions\DriverDoesNotSupportException.cs" />
+    <Compile Include="src\Nlog\ReplaceNewLinesFormatLayoutRendererWrapper.cs" />
     <Compile Include="src\PageCollector.cs" />
     <Compile Include="src\Pages\BasePage.cs" />
     <Compile Include="src\Specflow\ScenarioContextTypes.cs" />
