@@ -11,6 +11,9 @@
 
 > The project is in C#.Net, with the help of Appium/Selenium(.net version), NUnit, Specflow and Allure.  
 
+### Proejct logic
+![Project logic](structure.png?raw=true "Project logic")
+
 ### Configure driver and timeout
 ```xml
   <!-- You could config Driver and timeout in App.config -->
