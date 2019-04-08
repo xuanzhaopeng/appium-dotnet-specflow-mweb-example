@@ -107,7 +107,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecNunitFixtureSetup.cs" />
-    <Compile Include="Steps\GlobalIndexPageSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="allureConfig.json">
@@ -144,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
+    <Folder Include="Steps\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
