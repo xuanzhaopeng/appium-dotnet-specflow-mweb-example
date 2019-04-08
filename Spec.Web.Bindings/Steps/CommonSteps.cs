@@ -1,20 +1,11 @@
-﻿using Spec.Web.Core;
-using Spec.Web.Core.Specflow;
-using TechTalk.SpecFlow;
+﻿using TechTalk.SpecFlow;
 
 namespace Spec.Web.Bindings.Steps
 {
     [Binding]
-    public sealed class CommonSteps
+    public sealed class CommonSteps : BaseSteps
     {
-        private readonly ScenarioContext context;
-        private readonly WebTestContext testContext;
-
-        public CommonSteps(ScenarioContext injectedContext)
-        {
-            context = injectedContext;
-            testContext = context.Get<WebTestContext>(ScenarioContextTypes.Driver);
-        }
+        public CommonSteps(ScenarioContext injectedContext) : base(injectedContext) { }
 
         [StepDefinition("I navigate to CK website")]
         public void INavigateToCK()

@@ -20,8 +20,9 @@ namespace Spec.Web.Core
             var pageClassType = typeof(T);
             if (!pages.ContainsKey(pageClassType))
             {
-
-                T page = PageFactory.InitElements<T>(driver);
+                //FIX: PageFactory.InitElements<T>(driver) doesn't work
+                T page = (T)Activator.CreateInstance(typeof(T));
+                PageFactory.InitElements(driver, page);
                 pages.Add(pageClassType, page);
             }
             return pages[pageClassType] as T;
