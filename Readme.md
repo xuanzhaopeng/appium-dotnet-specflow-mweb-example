@@ -11,6 +11,10 @@
 
 > The project is in C#.Net, with the help of Appium/Selenium(.net version), NUnit, Specflow and Allure.  
 
+### Environment
+* C#.Net Target: 4.7.1
+* Specflow: 2.4.1
+
 ### Proejct logic
 ![Project logic](structure.png?raw=true "Project logic")
 
