@@ -5,7 +5,6 @@ using Spec.Web.Core.Specflow;
 using System.Configuration;
 using NLog;
 using System;
-using Spec.Web.Core.Enum;
 
 namespace Spec.Web.Bindings.Hooks
 {
@@ -28,6 +27,7 @@ namespace Spec.Web.Bindings.Hooks
             [BeforeScenario]
             public void BeforeScenario()
             {
+                logger.Info(String.Format("Working directory: {0}", Environment.CurrentDirectory));
                 WebTestContext webTestContext = new WebTestContext(driverFactory, testSettings);
                 webTestContext.StartDriver();
                 ScenarioContext.Current.Add(ScenarioContextTypes.Driver, webTestContext);

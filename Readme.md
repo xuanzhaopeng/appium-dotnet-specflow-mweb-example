@@ -3,12 +3,13 @@
 <p align="center">
   <img height="120px" src="https://pbs.twimg.com/profile_images/704462412880093184/IkgItC1R_400x400.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;
   <img height="120px" src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/363533-5515f774a5428408331f0358102d9f43-medium_jpg.jpg?buster=1408423281" />&nbsp;&nbsp;&nbsp;&nbsp;
-  <img height="120px" src="https://jfiaffe.files.wordpress.com/2015/07/specflow-logo.png" />
+  <img height="120px" src="https://jfiaffe.files.wordpress.com/2015/07/specflow-logo.png" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img height="120px" src="https://avatars2.githubusercontent.com/u/5879127?s=280&v=4" />
 </p>
 
 [![Build Status](https://travis-ci.org/xuanzhaopeng/appium-dotnet-specflow-mweb-example.svg?branch=master)](https://travis-ci.org/xuanzhaopeng/appium-dotnet-specflow-mweb-example)
 
-> The project is in C#.Net, with the help of Appium/Selenium(.net version), NUnit and Specflow.  
+> The project is in C#.Net, with the help of Appium/Selenium(.net version), NUnit, Specflow and Allure.  
 
 ### Configure driver and timeout
 ```xml
@@ -68,6 +69,9 @@ nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 msbuild /p:Configuration=Release Spec.Web.sln
 ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./Spec.Web.Desktop/bin/Release/Spec.Web.Desktop.dll
 ```
+
+### Test Report
+It will generate Allure test report in allure-results folder where the assemly located. Please kindly noticed I do not really properly configured the Allure report, you could extend it such as adding screenshots or recorded videos into report.
 
 ### Project structure
 * Spec.Web.Core: The core library that could be shared by all test assembly
